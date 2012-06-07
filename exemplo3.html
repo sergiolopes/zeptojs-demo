@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+	<title>Exemplo Touch</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<style>
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		background: #BADA55;
+		border-radius: 5px;
+		list-style-type: none;
+		padding: 5px;
+		margin: 10px 5px;
+	}
+	</style>
+</head>
+<body>
+
+	<h1>Swipe, long tap e double tap</h1>
+
+	<ul>
+		<li>Item #1</li>
+		<li>Item #2</li>
+		<li>Item #3</li>
+		<li>Item #4</li>
+		<li>Item #5</li>
+	</ul>
+
+	<p>Swipe right no item pra remover. Long tap pra duplicar. Double tap pra editar nome</p>
+
+	<script src="zepto.min.js"></script>
+	<script>
+
+		// bug fix Android 4
+		document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+		$('ul').on({
+
+			// remove no swipe
+			'swipeRight': function() {
+				$(this).animate({'background': 'red'}, 800, 'easein', function() {
+					$(this).remove();
+				});
+			},
+
+			// duplica no long tap
+			'longTap': function() {
+				$(this).clone().insertBefore(this).css('background', 'yellow').animate({'background': '#BADA55'}, 800);
+			},
+
+			// edita no double tap
+			'doubleTap': function() {
+				$(this).text(prompt('Novo valor?'));
+			}
+		}, 'li');
+
+	</script>
+</body>
+</html>

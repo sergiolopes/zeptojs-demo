@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+	<title>Exemplo Touch 1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+
+	<h1>Clique vs Tap</h1>
+
+	<button class="clique">Clique</button>
+	<button class="tap">Tap</button>
+
+	<script src="zepto.min.js"></script>
+	<script>
+
+		var cliques = 0;
+		var taps = 0;
+
+		$('.clique').click(function() {
+			$(this).text('Clique ' + (++cliques));
+		});
+
+		$('.tap').tap(function() {
+			$(this).text('Tap ' + (++taps));
+		});
+
+
+	</script>
+</body>
+</html>

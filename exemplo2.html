@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+	<title>Exemplo Touch 2</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<style>
+	html, body {
+		height: 100%;
+		margin: 0;
+	}
+	.foto {
+		height:90%;
+ 		width:100%;
+
+ 		background-position: center bottom;
+ 		background-repeat: none;
+ 		background-size: cover;
+	}
+	h1 {
+		height: 10%;
+		margin: 0;
+		text-align: center;
+	}
+	</style>
+</head>
+<body>
+
+	<h1>Swipe</h1>
+
+	<div class="foto"></div>
+
+	<script src="zepto.min.js"></script>
+	<script>
+
+		var imagens = ['img/foto1.jpg', 'img/foto2.jpg', 'img/foto3.jpg', 'img/foto4.jpg'];
+		var atual = 0;
+		
+		function atualiza() {
+			$('.foto').css('background-image', 'url(' + imagens[atual] + ')');
+			$('h1').text('Swipe (foto ' + (atual + 1) + ' de ' + imagens.length + ')');
+		}
+
+		atualiza();
+
+		// bug fix Android 4
+		document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+		$('.foto')
+			.swipeLeft(function() {
+				if (atual < imagens.length - 1) {
+					atual++;
+					atualiza();
+				}
+			})
+			.swipeRight(function() {
+				if (atual > 0) {
+					atual--;
+					atualiza();
+				}
+			});
+
+	</script>
+</body>
+</html>
